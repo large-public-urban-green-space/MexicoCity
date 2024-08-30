@@ -30,13 +30,13 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="data/UrbanStudyRegion_2.js"></script>
-        <script src="data/PublicUrbanGreenSpace_3.js"></script>
-        <script src="data/UGS_MexicoCity_PopGridWithinServiceArea_4.js"></script>
+        <script src="data/UrbanCentreBoundary_2.js"></script>
+        <script src="data/LargePublicUrbanGreenSpace_3.js"></script>
+        <script src="data/AccessibilityGrid_4.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[19.15091197951319,-99.58626179089941],[19.750590039076663,-98.60453668078101]]);
+        })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -64,6 +64,9 @@
         }, true);
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
         }
         map.createPane('pane_OSMStandard_0');
         var greyscaleFilter = 'grayscale(100%)';
@@ -95,7 +98,7 @@
         });
         layer_ESRIWorldImagery_1;
         map.addLayer(layer_ESRIWorldImagery_1);
-        function pop_UrbanStudyRegion_2(feature, layer) {
+        function pop_UrbanCentreBoundary_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['study_region'] !== null ? autolinker.link(feature.properties['study_region'].toLocaleString()) : '') + '</td>\
@@ -126,9 +129,9 @@
             popup.setContent(updatedContent);
         }
 
-        function style_UrbanStudyRegion_2_0() {
+        function style_UrbanCentreBoundary_2_0() {
             return {
-                pane: 'pane_UrbanStudyRegion_2',
+                pane: 'pane_UrbanCentreBoundary_2',
                 opacity: 1,
                 color: 'rgba(230,230,230,1.0)',
                 dashArray: '',
@@ -139,21 +142,21 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_UrbanStudyRegion_2');
-        map.getPane('pane_UrbanStudyRegion_2').style.zIndex = 402;
-        map.getPane('pane_UrbanStudyRegion_2').style['mix-blend-mode'] = 'normal';
-        var layer_UrbanStudyRegion_2 = new L.geoJson(json_UrbanStudyRegion_2, {
+        map.createPane('pane_UrbanCentreBoundary_2');
+        map.getPane('pane_UrbanCentreBoundary_2').style.zIndex = 402;
+        map.getPane('pane_UrbanCentreBoundary_2').style['mix-blend-mode'] = 'normal';
+        var layer_UrbanCentreBoundary_2 = new L.geoJson(json_UrbanCentreBoundary_2, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_UrbanStudyRegion_2',
-            layerName: 'layer_UrbanStudyRegion_2',
-            pane: 'pane_UrbanStudyRegion_2',
-            onEachFeature: pop_UrbanStudyRegion_2,
-            style: style_UrbanStudyRegion_2_0,
+            dataVar: 'json_UrbanCentreBoundary_2',
+            layerName: 'layer_UrbanCentreBoundary_2',
+            pane: 'pane_UrbanCentreBoundary_2',
+            onEachFeature: pop_UrbanCentreBoundary_2,
+            style: style_UrbanCentreBoundary_2_0,
         });
-        bounds_group.addLayer(layer_UrbanStudyRegion_2);
-        map.addLayer(layer_UrbanStudyRegion_2);
-        function pop_PublicUrbanGreenSpace_3(feature, layer) {
+        bounds_group.addLayer(layer_UrbanCentreBoundary_2);
+        map.addLayer(layer_UrbanCentreBoundary_2);
+        function pop_LargePublicUrbanGreenSpace_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
@@ -165,40 +168,22 @@
                         <td colspan="2">' + (feature.properties['aos_ha_pub'] !== null ? autolinker.link(feature.properties['aos_ha_pub'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['aos_ha'] !== null ? autolinker.link(feature.properties['aos_ha'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <td colspan="2">' + (feature.properties['NDVI_aa_av'] !== null ? autolinker.link(feature.properties['NDVI_aa_av'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['numgeom'] !== null ? autolinker.link(feature.properties['numgeom'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['water_perc'] !== null ? autolinker.link(feature.properties['water_perc'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['UGS_aa_ha'] !== null ? autolinker.link(feature.properties['UGS_aa_ha'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['aos_ha_wat'] !== null ? autolinker.link(feature.properties['aos_ha_wat'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['UGS_hm_ha'] !== null ? autolinker.link(feature.properties['UGS_hm_ha'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['geometryTy'] !== null ? autolinker.link(feature.properties['geometryTy'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['has_water_'] !== null ? autolinker.link(feature.properties['has_water_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['aos_ha_not'] !== null ? autolinker.link(feature.properties['aos_ha_not'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['attributes'] !== null ? autolinker.link(feature.properties['attributes'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['PUGS_hm_ha'] !== null ? autolinker.link(feature.properties['PUGS_hm_ha'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['NDVI_hm_av'] !== null ? autolinker.link(feature.properties['NDVI_hm_av'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PUGS_aa_ha'] !== null ? autolinker.link(feature.properties['PUGS_aa_ha'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['area'] !== null ? autolinker.link(feature.properties['area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['perimeter'] !== null ? autolinker.link(feature.properties['perimeter'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -208,9 +193,9 @@
             popup.setContent(updatedContent);
         }
 
-        function style_PublicUrbanGreenSpace_3_0() {
+        function style_LargePublicUrbanGreenSpace_3_0() {
             return {
-                pane: 'pane_PublicUrbanGreenSpace_3',
+                pane: 'pane_LargePublicUrbanGreenSpace_3',
                 stroke: false, 
                 fill: true,
                 fillOpacity: 1,
@@ -218,21 +203,21 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_PublicUrbanGreenSpace_3');
-        map.getPane('pane_PublicUrbanGreenSpace_3').style.zIndex = 403;
-        map.getPane('pane_PublicUrbanGreenSpace_3').style['mix-blend-mode'] = 'normal';
-        var layer_PublicUrbanGreenSpace_3 = new L.geoJson(json_PublicUrbanGreenSpace_3, {
+        map.createPane('pane_LargePublicUrbanGreenSpace_3');
+        map.getPane('pane_LargePublicUrbanGreenSpace_3').style.zIndex = 403;
+        map.getPane('pane_LargePublicUrbanGreenSpace_3').style['mix-blend-mode'] = 'normal';
+        var layer_LargePublicUrbanGreenSpace_3 = new L.geoJson(json_LargePublicUrbanGreenSpace_3, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_PublicUrbanGreenSpace_3',
-            layerName: 'layer_PublicUrbanGreenSpace_3',
-            pane: 'pane_PublicUrbanGreenSpace_3',
-            onEachFeature: pop_PublicUrbanGreenSpace_3,
-            style: style_PublicUrbanGreenSpace_3_0,
+            dataVar: 'json_LargePublicUrbanGreenSpace_3',
+            layerName: 'layer_LargePublicUrbanGreenSpace_3',
+            pane: 'pane_LargePublicUrbanGreenSpace_3',
+            onEachFeature: pop_LargePublicUrbanGreenSpace_3,
+            style: style_LargePublicUrbanGreenSpace_3_0,
         });
-        bounds_group.addLayer(layer_PublicUrbanGreenSpace_3);
-        map.addLayer(layer_PublicUrbanGreenSpace_3);
-        function pop_UGS_MexicoCity_PopGridWithinServiceArea_4(feature, layer) {
+        bounds_group.addLayer(layer_LargePublicUrbanGreenSpace_3);
+        map.addLayer(layer_LargePublicUrbanGreenSpace_3);
+        function pop_AccessibilityGrid_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['grid_id'] !== null ? autolinker.link(feature.properties['grid_id'].toLocaleString()) : '') + '</td>\
@@ -260,9 +245,9 @@
             popup.setContent(updatedContent);
         }
 
-        function style_UGS_MexicoCity_PopGridWithinServiceArea_4_0() {
+        function style_AccessibilityGrid_4_0() {
             return {
-                pane: 'pane_UGS_MexicoCity_PopGridWithinServiceArea_4',
+                pane: 'pane_AccessibilityGrid_4',
                 opacity: 1,
                 color: 'rgba(119,61,128,0.5)',
                 dashArray: '',
@@ -275,20 +260,20 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_UGS_MexicoCity_PopGridWithinServiceArea_4');
-        map.getPane('pane_UGS_MexicoCity_PopGridWithinServiceArea_4').style.zIndex = 404;
-        map.getPane('pane_UGS_MexicoCity_PopGridWithinServiceArea_4').style['mix-blend-mode'] = 'normal';
-        var layer_UGS_MexicoCity_PopGridWithinServiceArea_4 = new L.geoJson(json_UGS_MexicoCity_PopGridWithinServiceArea_4, {
+        map.createPane('pane_AccessibilityGrid_4');
+        map.getPane('pane_AccessibilityGrid_4').style.zIndex = 404;
+        map.getPane('pane_AccessibilityGrid_4').style['mix-blend-mode'] = 'normal';
+        var layer_AccessibilityGrid_4 = new L.geoJson(json_AccessibilityGrid_4, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_UGS_MexicoCity_PopGridWithinServiceArea_4',
-            layerName: 'layer_UGS_MexicoCity_PopGridWithinServiceArea_4',
-            pane: 'pane_UGS_MexicoCity_PopGridWithinServiceArea_4',
-            onEachFeature: pop_UGS_MexicoCity_PopGridWithinServiceArea_4,
-            style: style_UGS_MexicoCity_PopGridWithinServiceArea_4_0,
+            dataVar: 'json_AccessibilityGrid_4',
+            layerName: 'layer_AccessibilityGrid_4',
+            pane: 'pane_AccessibilityGrid_4',
+            onEachFeature: pop_AccessibilityGrid_4,
+            style: style_AccessibilityGrid_4_0,
         });
-        bounds_group.addLayer(layer_UGS_MexicoCity_PopGridWithinServiceArea_4);
-        map.addLayer(layer_UGS_MexicoCity_PopGridWithinServiceArea_4);
+        bounds_group.addLayer(layer_AccessibilityGrid_4);
+        map.addLayer(layer_AccessibilityGrid_4);
             var abstract = new L.Control({'position':'topright'});
             abstract.onAdd = function (map) {
                 this._div = L.DomUtil.create('div',
@@ -301,7 +286,7 @@
                 abstract.show = function () {
                     this._div.classList.remove("abstract");
                     this._div.classList.add("abstractUncollapsed");
-                    this._div.innerHTML = 'Mexico City - 2025 Projection<br>Public Urban Green Space Accessibility';
+                    this._div.innerHTML = 'Mexico City, Mexico<br>Large Public Urban Green Space Accessibility';
             };
             abstract.addTo(map);
             var abstract2 = new L.Control({ 'position': 'topright' });
@@ -314,11 +299,11 @@
                 abstract2.show = function () {
                     this._div.classList.remove("abstract");
                     this._div.classList.add("abstract2");
-                    this._div.innerHTML = "16.64% of Mexico's estimated 2025 population have access to public urban green space of area ≥1 ha within 500 m pedestrian network distance";
+                    this._div.innerHTML = "16.24% of Mexico City's estimated 2025 population have access to large public urban green space of area ≥1 ha within 500 m pedestrian network distance";
                 };
                 abstract2.addTo(map);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/UGS_MexicoCity_PopGridWithinServiceArea_4.png" /> Access to public urban green space<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of area ≥1 hectare within 500 m<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pedestrian network distance': layer_UGS_MexicoCity_PopGridWithinServiceArea_4,'<img src="legend/PublicUrbanGreenSpace_3.png" /> Public Urban Green Space': layer_PublicUrbanGreenSpace_3,'<img src="legend/UrbanStudyRegion_2.png" /> Urban Study Region': layer_UrbanStudyRegion_2,"ESRI World Imagery": layer_ESRIWorldImagery_1,"OSM Standard": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/AccessibilityGrid_4.png" /> Access to large public urban green space<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of area ≥1 hectare within 500 m<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pedestrian network distance': layer_AccessibilityGrid_4,'<img src="legend/LargePublicUrbanGreenSpace_3.png" /> Large Public Urban Green Space': layer_LargePublicUrbanGreenSpace_3,'<img src="legend/UrbanCentreBoundary_2.png" /> Urban Centre Boundary': layer_UrbanCentreBoundary_2,"ESRI World Imagery": layer_ESRIWorldImagery_1,"OSM Standard": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
         setBounds();
         </script>
     </body>
